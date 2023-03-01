@@ -216,6 +216,10 @@ func NewSortedSetBuilder[T any](comparer Comparer[T]) *SortedSetBuilder[T] {
 	return &SortedSetBuilder[T]{s: NewSortedSet(comparer)}
 }
 
+func NewSortedSetBuilderFromInitial[T any](s SortedSet[T]) *SortedSetBuilder[T] {
+	return &SortedSetBuilder[T]{s: SortedSet[T]{s.m.clone()}}
+}
+
 func (s SortedSetBuilder[T]) Set(val T) {
 	s.s.m = s.s.m.set(val, struct{}{}, true)
 }
